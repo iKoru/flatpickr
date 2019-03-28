@@ -939,7 +939,9 @@ function FlatpickrInstance(
     currentMonth.appendChild(yearInput);
 
     monthNavFragment.appendChild(currentMonth);
+    container.appendChild(self.prevMonthNav);
     container.appendChild(monthNavFragment);
+    container.appendChild(self.nextMonthNav);
 
     return {
       container,
@@ -950,7 +952,7 @@ function FlatpickrInstance(
 
   function buildMonths() {
     clearNode(self.monthNav);
-    self.monthNav.appendChild(self.prevMonthNav);
+    // self.monthNav.appendChild(self.prevMonthNav);
 
     if (self.config.showMonths) {
       self.yearElements = [];
@@ -964,7 +966,7 @@ function FlatpickrInstance(
       self.monthNav.appendChild(month.container);
     }
 
-    self.monthNav.appendChild(self.nextMonthNav);
+    // self.monthNav.appendChild(self.nextMonthNav);
   }
 
   function buildMonthNav() {

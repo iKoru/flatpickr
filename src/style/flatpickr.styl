@@ -29,7 +29,7 @@
   touch-action manipulation
 
   if $noCalendarBorder is defined
-    box-shadow 0 3px 13px alpha(black, 0.08)
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
 
   else
     background $calendarBackground
@@ -156,14 +156,14 @@
 
 .flatpickr-months
   display flex
+  align-items center
+  height $monthNavHeight
 
   .flatpickr-month
     if $noCalendarBorder is defined
       border-radius 5px 5px 0 0
     background $monthBackground
     color $monthForeground
-    fill $monthForeground
-    height $monthNavHeight
     line-height 1
     text-align center
     position relative
@@ -174,11 +174,6 @@
   .flatpickr-prev-month, .flatpickr-next-month
     text-decoration none
     cursor pointer
-    position absolute
-    top 0px
-    line-height 16px
-    height $monthNavHeight
-    padding 10px
     z-index 3
     color $monthForeground
     fill $monthForeground
@@ -243,7 +238,6 @@
       -webkit-appearance none
 
   span
-    position absolute
     right 0
     width 14px
     padding 0 4px 0 2px
@@ -298,35 +292,23 @@
 
 
 .flatpickr-current-month
-  font-size 135%
-  line-height inherit
-  font-weight 300
+  font-size 15px
   color inherit
-  position absolute
-  width 75%
-  left 12.5%
-  padding (0.22*$monthNavHeight) 0 0 0
+  padding 0 15px 0 15px
   line-height 1
-  height $monthNavHeight
   display inline-block
   text-align center
-  transform translate3d(0px, 0px, 0px)
 
   span.cur-month
     font-family inherit
-    font-weight 700
     color inherit
     display inline-block
     margin-left 0.5ch
     padding 0
 
-    &:hover
-      background: alpha($invertedBg, 0.05)
-
-
   .numInputWrapper
-    width 6ch
-    width unquote("7ch\0")
+    width 4ch
+    width unquote("5ch\0")
     display inline-block
 
     span.arrowUp:after
@@ -338,15 +320,10 @@
   input.cur-year
     background transparent
     box-sizing border-box
-    color inherit
     cursor text
-    padding 0 0 0 0.5ch
+    text-align right
     margin 0
     display inline-block
-    font-size inherit
-    font-family inherit
-    font-weight 300
-    line-height inherit
     height auto
     border 0
     border-radius 0
@@ -363,6 +340,10 @@
       color alpha($monthForeground, 0.5)
       background transparent
       pointer-events none
+
+  &:hover
+    input.cur-year
+      margin-right 14px
 
 .flatpickr-weekdays
   background $weekdaysBackground
@@ -381,7 +362,7 @@
 
 span.flatpickr-weekday
   cursor default
-  font-size 90%
+  font-size 11px
   background $monthBackground
   color $weekdaysForeground
   line-height 1
@@ -389,8 +370,9 @@ span.flatpickr-weekday
   text-align center
   display block
   flex 1
-  font-weight bolder
 
+span.flatpickr-weekday:first-child
+  color $sundayColor
 
 .dayContainer, .flatpickr-weeks
   padding 1px 0 0 0
@@ -453,6 +435,9 @@ span.flatpickr-weekday
   justify-content center
   text-align center
 
+  &:not(.today):nth-child(7n+1)
+    color $sundayColor
+
   &, &.prevMonthDay, &.nextMonthDay
     &.inRange, &.today.inRange, &:hover, &:focus
       cursor pointer
@@ -460,6 +445,8 @@ span.flatpickr-weekday
       background $dayHoverBackground
       border-color $dayHoverBackground
 
+  &.prevMonthDay, &.nextMonthDay
+    opacity 0.35
 
   &.today
     border-color $todayColor
@@ -505,7 +492,7 @@ span.flatpickr-weekday
   &.disabled, &.disabled:hover,
   &.prevMonthDay, &.nextMonthDay,
   &.notAllowed, &.notAllowed.prevMonthDay, &.notAllowed.nextMonthDay
-    color alpha($dayForeground, 0.3)
+    color alpha($dayForeground, 0.35)
     background transparent
 
     if $disabled_border_color is defined
