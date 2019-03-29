@@ -27,6 +27,7 @@
   width $calendarWidth
   box-sizing border-box
   touch-action manipulation
+  padding 7px
 
   if $noCalendarBorder is defined
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
@@ -158,6 +159,7 @@
   display flex
   align-items center
   height $monthNavHeight
+  font-size 15px
 
   .flatpickr-month
     if $noCalendarBorder is defined
@@ -177,6 +179,7 @@
     z-index 3
     color $monthForeground
     fill $monthForeground
+    padding 10px
 
     &.disabled
       display none
@@ -203,18 +206,9 @@
       /*rtl:end:ignore*//*
       */
 
-    &:hover
-      color $todayColor
-      svg
-        if $arrow_hover_color is defined
-          fill $arrow_hover_color
-
-        else
-          fill $todayColor
-
     svg
-      width 14px
-      height 14px
+      width 6px
+      height 6px
 
       path
         transition fill 0.1s
@@ -225,10 +219,8 @@
   position relative
   height auto
 
-  input, span
-    display inline-block
-
   input
+    display inline-block
     width 100%
     &::-ms-clear
       display none
@@ -237,64 +229,8 @@
       margin 0
       -webkit-appearance none
 
-  span
-    right 0
-    width 14px
-    padding 0 4px 0 2px
-    height 50%
-    line-height 50%
-    opacity 0
-    cursor pointer
-    border 1px solid alpha($dayForeground, 0.15)
-    box-sizing border-box
-
-    &:hover
-      background: alpha($invertedBg, 0.1)
-
-    &:active
-      background: alpha($invertedBg, 0.2)
-
-    &:after
-      display block
-      content ""
-      position absolute
-
-    &.arrowUp
-      top 0
-      border-bottom 0
-
-      &:after
-        border-left 4px solid transparent
-        border-right 4px solid transparent
-        border-bottom 4px solid alpha($dayForeground, 0.6)
-        top 26%
-
-    &.arrowDown
-      top 50%
-
-      &:after
-        border-left 4px solid transparent
-        border-right 4px solid transparent
-        border-top 4px solid alpha($dayForeground, 0.6)
-        top 40%
-
-    svg
-      width inherit
-      height auto
-      path
-        fill alpha($monthForeground, 0.5)
-
-  &:hover
-    background: alpha($invertedBg, 0.05)
-
-    span
-      opacity 1
-
-
 .flatpickr-current-month
-  font-size 15px
   color inherit
-  padding 0 15px 0 15px
   line-height 1
   display inline-block
   text-align center
@@ -307,20 +243,13 @@
     padding 0
 
   .numInputWrapper
-    width 4ch
-    width unquote("5ch\0")
+    width 36px
     display inline-block
-
-    span.arrowUp:after
-      border-bottom-color $monthForeground
-
-    span.arrowDown:after
-      border-top-color $monthForeground
 
   input.cur-year
     background transparent
     box-sizing border-box
-    cursor text
+    cursor default
     text-align right
     margin 0
     display inline-block
@@ -362,7 +291,6 @@
 
 span.flatpickr-weekday
   cursor default
-  font-size 11px
   background $monthBackground
   color $weekdaysForeground
   line-height 1
@@ -382,23 +310,14 @@ span.flatpickr-weekday:first-child
   overflow: hidden;
   display flex
   align-items: flex-start;
-  width $daysWidth
 
   &:focus
     outline 0
-
-  if $noCalendarBorder is defined
-    border-left 1px solid $calendarBorderColor
-    border-right 1px solid $calendarBorderColor
-
 
 .dayContainer
   padding 0
   outline 0
   text-align left
-  width ($daysWidth)
-  min-width ($daysWidth)
-  max-width ($daysWidth)
   box-sizing border-box
   display inline-block
   display -ms-flexbox
@@ -421,12 +340,11 @@ span.flatpickr-weekday:first-child
   color $dayForeground
   cursor pointer
 
-  font-weight 400
   width 14.2857143%
   flex-basis 14.2857143%
-  height $daySize
-  line-height $daySize
-  margin 0
+  height $dayHeight
+  line-height $dayHeight
+  max-width $daySize
 
   display inline-block
   position relative
@@ -521,11 +439,7 @@ span.flatpickr-weekday:first-child
 
   .flatpickr-weeks
     padding 0 12px
-    if $noCalendarBorder is defined
-      border-left 1px solid $calendarBorderColor
-    else
-      box-shadow 1px 0 0 $calendarBorderColor
-
+    
   .flatpickr-weekday
     float none
     width 100%
@@ -546,11 +460,8 @@ span.flatpickr-weekday:first-child
   display block
   display flex
   box-sizing border-box
-  overflow: hidden;
-
-  if $noCalendarBorder is defined
-    background $calendarBackground
-    border-bottom 1px solid $calendarBorderColor
+  overflow hidden
+  font-size 11px
 
 
 .flatpickr-rContainer
@@ -572,7 +483,7 @@ span.flatpickr-weekday:first-child
 
   if $noCalendarBorder is defined
     background $calendarBackground
-    border-radius 0 0 5px  5px
+    border-radius 0 0 5px 5px
 
   &:after
     content ""
@@ -584,12 +495,6 @@ span.flatpickr-weekday:first-child
     width 40%
     height $timeHeight
     float left
-
-    span.arrowUp:after
-      border-bottom-color $dayForeground
-
-    span.arrowDown:after
-      border-top-color $dayForeground
 
   &.hasSeconds .numInputWrapper
     width 26%
