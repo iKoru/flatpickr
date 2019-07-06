@@ -936,7 +936,7 @@ function FlatpickrInstance(
       "flatpickr-current-month"
     );
     currentMonth.appendChild(yearInput);
-    currentMonth.append('.');
+    currentMonth.appendChild(document.createTextNode('.'));
     currentMonth.appendChild(monthElement);
 
     monthNavFragment.appendChild(currentMonth);
